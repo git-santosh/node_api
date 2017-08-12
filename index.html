@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Axios</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://bootswatch.com/cerulean/bootstrap.min.css">
+    <style>
+      img.loading{
+        position:absolute;
+        top:0;
+        left:0;
+        right:0;
+        /* bottom:0; */
+        margin:auto;
+      }
+    </style>
+  </head>
+  <body>
+    <center><img src="/3.gif" class="loading" alt="no image found"></center>
+    <div class="container">
+        <div class="panel panel-primary">
+            <div class="panel-heading">get Request</div>
+            <div class="panel-body">
+                <button class="btn btn-primary" onclick="perfomGetRequest()">get Bookmarks</button>
+                <button class="btn btn-warning" onclick="clearOutput()" >Clear</button>
+                <div class="panel-body" id="result"></div>
+            </div>      
+        </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+	<script>
+    $('.loading').hide();
+    function clearOutput(){
+      $('#result').html("");
+    }
+	function perfomGetRequest(){
+    $('.loading').show();
+    $.ajax({
+      url: "http://localhost:3000/bookmark",
+      cache: false,
+      success: function(data){
+      $("#result").append(data.html);
+      },
+      complete:function(){
+        $('.loading').hide();
+      }
+    });
+}
+	</script>
+  </body>
+</html>
